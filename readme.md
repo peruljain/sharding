@@ -23,6 +23,6 @@ POC for mysql database sharding using proxysql
 3. Based on even or odd primary key, route request to mysql instance
 
 # steps
-1. docker-componse up 
+1. docker-compose up 
 2. docker ps
 3. python3 proxysql_sharding.py 
