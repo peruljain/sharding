@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  mysql1:
+    image: mysql:5.7
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user
+      MYSQL_USER: u1
+      MYSQL_PASSWORD: p1
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql1_data:/var/lib/mysql
+
+  mysql2:
+    image: mysql:5.7
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user
+      MYSQL_USER: u2
+      MYSQL_PASSWORD: p2
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql2_data:/var/lib/mysql
+
+  proxysql:
+    image: proxysql/proxysql:latest
+    platform: linux/amd64
+    ports:
+      - "6032:6032"  # Port for admin interface
+      - "6033:6033"  # Port for client connections
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - ./proxysql.cnf:/etc/proxysql.cnf  # Assuming you have a configuration file
+    depends_on:
+      - mysql1
+      - mysql2
+
+volumes:
+  mysql1_data:
+  mysql2_data:

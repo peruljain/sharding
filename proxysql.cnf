@@ -1,0 +1,47 @@
+mysql_servers =
+(
+    {
+        address = "mysql1"
+        port = 3306
+        hostgroup = 1
+        use_ssl = false
+    },
+    {
+        address = "mysql2"
+        port = 3306
+        hostgroup = 2
+        use_ssl = false
+    }
+)
+
+mysql_users:
+(
+    {
+        username = "root"
+        password = "root"
+        default_hostgroup = 1
+        active = 1
+    },
+    {
+        username = "root"
+        password = "root"
+        default_hostgroup = 2
+        active = 1 
+    }
+)
+
+admin_variables = 
+{
+    admin_credentials = "admin:admin"
+    mysql_ifaces = "0.0.0.0:6032"
+}
+
+
+mysql_variables = 
+{
+    threads = 4
+    max_connections = 2048
+    monitor_username="root"
+	monitor_password="root"
+}
+
