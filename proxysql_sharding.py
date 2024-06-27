@@ -22,7 +22,7 @@ def execute_query(connection, query, value):
     try:
         cursor.execute(query, value)
         connection.commit()
-        print("Query executed successfully")
+        print("Query executed successfully " + query)
     except Error as e:
         print(f"The error '{e}' occurred")
 
@@ -30,10 +30,10 @@ def execute_query(connection, query, value):
 connection = create_connection("localhost", 6033, "root", "root", "user")
 
 
-i = 0
-while i < 10:
+i = 1
+while i <= 20:
     value = "perul-" + str(i)
     print(value)
-    i = i + 1
     insert_query = """INSERT INTO user (id, name) VALUES (%s, %s)"""
     execute_query(connection, insert_query, (i,value,))
+    i = i + 1

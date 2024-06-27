@@ -39,6 +39,7 @@ services:
       MYSQL_PASSWORD: admin
     volumes:
       - ./proxysql.cnf:/etc/proxysql.cnf  # Assuming you have a configuration file
+      - .:/var/lib/proxysql
     depends_on:
       - mysql1
       - mysql2
